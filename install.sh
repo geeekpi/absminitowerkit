@@ -21,7 +21,7 @@ cd /usr/local/
 if [ ! -d luma.examples ]; then
    cd /usr/local/
    git clone https://github.com/rm-hull/luma.examples.git && cd /usr/local/luma.examples/ || log_warning_msg "Could not download repository from github, please check the internet connection..." 
-   cd luma.examples/  && sudo -H pip3 install -e . && log_action_msg "Install dependencies packages successfully..." || log_warning_msg "Cound not access github repository, please check the internet connections!!!" 
+   cd /usr/local/luma.examples/  && sudo -H pip3 install -e . && log_action_msg "Install dependencies packages successfully..." || log_warning_msg "Cound not access github repository, please check the internet connections!!!" 
 fi 
 
 # download rpi_ws281x libraries.
