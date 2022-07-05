@@ -20,9 +20,10 @@ sudo usermod -a -G gpio,i2c pi && log_action_msg "grant privilledges to user pi"
 cd /usr/local/ 
 if [ ! -d luma.examples ]; then
    cd /usr/local/
-   git clone https://github.com/rm-hull/luma.examples.git && cd /usr/local/luma.examples/ || log_warning_msg "Could not download repository from github, please check the internet connection..." 
-   cd /usr/local/luma.examples/  && sudo -H pip3 install -e . && log_action_msg "Install dependencies packages successfully..." || log_warning_msg "Cound not access github repository, please check the internet connections!!!" 
+   git clone https://github.com/rm-hull/luma.examples.git && cd /usr/local/luma.examples/ && sudo cp -f /home/$USER/absminitowerkit/sysinfo.py . || log_warning_msg "Could not download repository from github, please check the internet connection..." 
 fi 
+
+cd /usr/local/luma.examples/  && sudo -H pip3 install -e . && log_action_msg "Install dependencies packages successfully..." || log_warning_msg "Cound not access github repository, please check the internet connections!!!" 
 
 # download rpi_ws281x libraries.
 cd /usr/local/ 
@@ -81,19 +82,17 @@ sudo systemctl restart ${moodlight_svc}.service
 oled_svc="minitower_oled"
 oled_svc_file="/lib/systemd/system/${oled_svc}.service"
 
-if [ -d /usr/local/luma.examples ]; then
 sudo echo "[Unit]" > ${oled_svc_file}
 sudo echo "Description=Minitower Service" >> ${oled_svc_file}
 sudo echo "DefaultDependencies=no" >> ${oled_svc_file}
 sudo echo "StartLimitIntervalSec=60" >> ${oled_svc_file}
 sudo echo "StartLimitBurst=5" >> ${oled_svc_file}
 sudo 
-sudo 
 sudo echo "[Service]" >> ${oled_svc_file}
 sudo echo "RootDirectory=/" >> ${oled_svc_file}
 sudo echo "User=root" >> ${oled_svc_file}
-sudo echo "Type=simple" >> ${oled_svc_file}
-sudo echo "ExecStart=sudo /usr/bin/python3 /usr/local/luma.examples/examples/sys_info.py & " >> ${oled_svc_file}
+sudo echo "Type=forking" >> ${oled_svc_file}
+sudo echo "ExecStart=/bin/bash -c '/usr/bin/python3 /usr/local/luma.examples/examples/sys_info.py &'" >> ${oled_svc_file}
 sudo echo "RemainAfterExit=yes" >> ${oled_svc_file}
 sudo echo "Restart=always" >> ${oled_svc_file}
 sudo echo "RestartSec=30" >> ${oled_svc_file}
@@ -115,7 +114,4 @@ log_success_msg "Minitower service installation finished successfully."
 # greetings and require rebooting system to take effect.
 log_action_msg "Have fun!" 
 sudo sync
-else 
-  log_warning_msg "Installation failed due to can not download the repository from github..."
-fi
 

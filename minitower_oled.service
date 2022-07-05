@@ -1,15 +1,11 @@
 [Unit]
-Description=Minitower Service
-DefaultDependencies=no
-StartLimitIntervalSec=60
-StartLimitBurst=5
+Description=Minitower oled Service
 
 [Service]
-RootDirectory=/
+Type=forking
 User=root
-Type=simple
-ExecStart=sudo /usr/bin/python3 /usr/local/luma.examples/examples/sys_info.py & 
-RemainAfterExit=yes
+# ExecStart=/bin/bash -c 'python3 /usr/local/luma.examples/examples/animated_gif.py &'
+ExecStart=/bin/bash -c 'python3 /usr/local/luma.examples/examples/sysinfo.py &'
 Restart=always
 RestartSec=30
 
