@@ -92,7 +92,7 @@ sudo echo "[Service]" >> ${oled_svc_file}
 sudo echo "RootDirectory=/" >> ${oled_svc_file}
 sudo echo "User=root" >> ${oled_svc_file}
 sudo echo "Type=forking" >> ${oled_svc_file}
-sudo echo "ExecStart=/bin/bash -c '/usr/bin/python3 /usr/local/luma.examples/examples/sys_info.py &'" >> ${oled_svc_file}
+sudo echo "ExecStart=/bin/bash -c '/usr/bin/python3 /usr/local/luma.examples/examples/sysinfo.py &'" >> ${oled_svc_file}
 sudo echo "RemainAfterExit=yes" >> ${oled_svc_file}
 sudo echo "Restart=always" >> ${oled_svc_file}
 sudo echo "RestartSec=30" >> ${oled_svc_file}
