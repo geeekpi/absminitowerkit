@@ -35,8 +35,10 @@ fi
 
 # Enable i2c function on raspberry pi.
 log_action_msg "Enable i2c on Raspberry Pi "
+
 sudo sed -i '/dtparam=i2c_arm*/d' /boot/config.txt 
 sudo sed -i '$a\dtparam=i2c_arm=on' /boot/config.txt 
+
 if [ $? -eq 0 ]; then
    log_action_msg "i2c has been setting up successfully"
 fi
@@ -51,6 +53,7 @@ fi
 # mood light service.
 moodlight_svc="minitower_moodlight"
 moodlight_svc_file="/lib/systemd/system/${moodlight_svc}.service"
+sudo rm -f ${moodlight_svc_file}
 
 sudo echo "[Unit]" > ${moodlight_svc_file}
 sudo echo "Description=Minitower moodlight Service" >> ${moodlight_svc_file}
@@ -88,7 +91,6 @@ sudo echo "Description=Minitower Service" >> ${oled_svc_file}
 sudo echo "DefaultDependencies=no" >> ${oled_svc_file}
 sudo echo "StartLimitIntervalSec=60" >> ${oled_svc_file}
 sudo echo "StartLimitBurst=5" >> ${oled_svc_file}
-sudo 
 sudo echo "[Service]" >> ${oled_svc_file}
 sudo echo "RootDirectory=/" >> ${oled_svc_file}
 sudo echo "User=root" >> ${oled_svc_file}
@@ -103,19 +105,21 @@ sudo echo "WantedBy=multi-user.target" >> ${oled_svc_file}
 
 log_action_msg "Minitower Service configuration finished." 
 sudo chown root:root ${oled_svc_file}
-sudo chmod 644 $oled_svc_file
+sudo chmod 644 ${oled_svc_file}
 
 log_action_msg "Minitower Service Load module." 
-sudo systemctl daemon-reload
-sudo systemctl enable ${oled_svc}.service
-sudo systemctl restart ${oled_svc}.service
+systemctl daemon-reload
+systemctl enable ${oled_svc}.service
+systemctl restart ${oled_svc}.service
 
 # copy sysinfo.py application to /usr/local/luma.examples/examples/ folder.
 sudo cp -vf /home/pi/absminitowerkit/sysinfo.py /usr/local/luma.examples/examples/ 2>/dev/null 
 
 # Finished 
 log_success_msg "Minitower service installation finished successfully." 
+
 # greetings and require rebooting system to take effect.
-log_action_msg "Have fun!" 
+log_action_msg "Please reboot Raspberry Pi and Have fun!" 
 sudo sync
+
 
