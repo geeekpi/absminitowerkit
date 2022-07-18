@@ -29,7 +29,7 @@ cd /usr/local/luma.examples/  && sudo -H pip3 install -e . && log_action_msg "In
 cd /usr/local/ 
 if [ ! -d rpi_ws281x ]; then
    cd /usr/local/
-   git clone https://github.com/jgarff/rpi_ws281x && log_action_msg "Download moodlight driver finished..." || log_warning_msg "Could not access github repository, please check the internet connections!!!" 
+   sudo git clone https://github.com/jgarff/rpi_ws281x && log_action_msg "Download moodlight driver finished..." || log_warning_msg "Could not access github repository, please check the internet connections!!!" 
    cd rpi_ws281x/ && sudo scons && mkdir build && cd build/ && cmake -D BUILD_SHARED=OFF -D BUILD_TEST=ON .. && sudo make install && sudo cp ./test /usr/bin/moodlight  && log_action_msg "Installation finished..." || log_warning_msg "Installation process failed! Please try again..."
 fi
 
@@ -81,6 +81,7 @@ sudo systemctl restart ${moodlight_svc}.service
 # oled screen display service.
 oled_svc="minitower_oled"
 oled_svc_file="/lib/systemd/system/${oled_svc}.service"
+sudo rm -f ${oled_svc_file}
 
 sudo echo "[Unit]" > ${oled_svc_file}
 sudo echo "Description=Minitower Service" >> ${oled_svc_file}
@@ -92,7 +93,7 @@ sudo echo "[Service]" >> ${oled_svc_file}
 sudo echo "RootDirectory=/" >> ${oled_svc_file}
 sudo echo "User=root" >> ${oled_svc_file}
 sudo echo "Type=forking" >> ${oled_svc_file}
-sudo echo "ExecStart=/bin/bash -c '/usr/bin/python3 /usr/local/luma.examples/examples/sysinfo.py &'" >> ${oled_svc_file}
+sudo echo "ExecStart=/bin/bash -c '/usr/bin/python3 /usr/local/luma.examples/examples/animated_gif.py &'" >> ${oled_svc_file}
 sudo echo "RemainAfterExit=yes" >> ${oled_svc_file}
 sudo echo "Restart=always" >> ${oled_svc_file}
 sudo echo "RestartSec=30" >> ${oled_svc_file}
@@ -108,6 +109,9 @@ log_action_msg "Minitower Service Load module."
 sudo systemctl daemon-reload
 sudo systemctl enable ${oled_svc}.service
 sudo systemctl restart ${oled_svc}.service
+
+# copy sysinfo.py application to /usr/local/luma.examples/examples/ folder.
+sudo cp -vf /home/pi/absminitowerkit/sysinfo.py /usr/local/luma.examples/examples/ 2>/dev/null 
 
 # Finished 
 log_success_msg "Minitower service installation finished successfully." 
