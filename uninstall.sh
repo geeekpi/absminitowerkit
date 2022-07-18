@@ -28,6 +28,6 @@ sudo rm -f /usr/bin/moodlight 2&>/dev/null
 sudo rm -rf /lib/systemd/system/minitower_oled.service 2&>/dev/null
 
 sudo rm -rf /usr/local/luma.examples/ 2&>/dev/null
-sudo rm -rf /usr/local/rpi-ws281x/ 2&>/dev/null
+sudo rm -rf /usr/local/rpi_ws281x/ 2&>/dev/null
 
 log_success_msg "Uninstall Mini tower kit Driver Successfully." 
