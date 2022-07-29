@@ -21,6 +21,9 @@ cd /usr/local/
 if [ ! -d luma.examples ]; then
    cd /usr/local/
    git clone https://github.com/rm-hull/luma.examples.git && cd /usr/local/luma.examples/ && sudo cp -f /home/pi/absminitowerkit/sysinfo.py . || log_warning_msg "Could not download repository from github, please check the internet connection..." 
+else
+   # copy sysinfo.py application to /usr/local/luma.examples/examples/ folder.
+   sudo cp -vf /home/pi/absminitowerkit/sysinfo.py /usr/local/luma.examples/examples/ 2>/dev/null
 fi 
 
 cd /usr/local/luma.examples/  && sudo -H pip3 install -e . && log_action_msg "Install dependencies packages successfully..." || log_warning_msg "Cound not access github repository, please check the internet connections!!!" 
@@ -95,7 +98,8 @@ sudo echo "[Service]" >> ${oled_svc_file}
 sudo echo "RootDirectory=/" >> ${oled_svc_file}
 sudo echo "User=root" >> ${oled_svc_file}
 sudo echo "Type=forking" >> ${oled_svc_file}
-sudo echo "ExecStart=/bin/bash -c '/usr/bin/python3 /usr/local/luma.examples/examples/animated_gif.py &'" >> ${oled_svc_file}
+sudo echo "ExecStart=/bin/bash -c '/usr/bin/python3 /usr/local/luma.examples/examples/sysinfo.py &'" >> ${oled_svc_file}
+sudo echo "# ExecStart=/bin/bash -c '/usr/bin/python3 /usr/local/luma.examples/examples/clock.py &'" >> ${oled_svc_file}
 sudo echo "RemainAfterExit=yes" >> ${oled_svc_file}
 sudo echo "Restart=always" >> ${oled_svc_file}
 sudo echo "RestartSec=30" >> ${oled_svc_file}
@@ -110,10 +114,7 @@ sudo chmod 644 ${oled_svc_file}
 log_action_msg "Minitower Service Load module." 
 systemctl daemon-reload
 systemctl enable ${oled_svc}.service
-systemctl restart ${oled_svc}.service
-
-# copy sysinfo.py application to /usr/local/luma.examples/examples/ folder.
-sudo cp -vf /home/pi/absminitowerkit/sysinfo.py /usr/local/luma.examples/examples/ 2>/dev/null 
+systemctl restart ${oled_svc}.service 
 
 # Finished 
 log_success_msg "Minitower service installation finished successfully." 
