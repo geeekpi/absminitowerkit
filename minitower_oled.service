@@ -4,8 +4,8 @@ Description=Minitower oled Service
 [Service]
 Type=forking
 User=root
-ExecStart=/bin/bash -c 'python3 /usr/local/luma.examples/examples/animated_gif.py &'
-# ExecStart=/bin/bash -c 'python3 /usr/local/luma.examples/examples/sysinfo.py &'
+# ExecStart=/bin/bash -c 'python3 /usr/local/luma.examples/examples/animated_gif.py &'
+ExecStart=/bin/bash -c 'python3 /usr/local/luma.examples/examples/sysinfo.py &'
 Restart=always
 RestartSec=30
 
