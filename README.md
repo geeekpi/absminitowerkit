@@ -1,6 +1,6 @@
 # absminitowerkit
 ABS mini tower kit 's driver and installation script. 
-## How to install
+## How to install ( script for Raspberry Pi OS 64bit ) 
 * 1. Download the latest image from https://www.raspberrypi.com/software/
 * 2. Flash it to your TF Card with etcher tool, Download link: https://etcher.io/
 * 3. After flashing, insert the TF card back to Raspberry Pi card Slot.
@@ -29,3 +29,5 @@ sudo ./install.sh
 sudo sync
 sudo reboot
 ```
+## T.B.D install script for Ubuntu 22.04 LTS User
+TBD.
