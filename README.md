@@ -117,5 +117,21 @@ execute the python file like :
 ```bash
 sudo python3 moodlight.py 
 ```
+
+## How to turn off all leds?
+just copy following code to a file and execute it. 
+```python
+import board
+from neopixel import NeoPixel
+
+np = NeoPixel(board.D18, 4) 
+
+np.fill((0,0,0))
+```
+Save it and execute it:
+```bash
+sudo python3 turnoff_leds.py
+```
+
 ## That's all 
 Have a nice day and have fun!
