@@ -14,16 +14,16 @@ if [ $? -eq 0 ]; then
 fi
 
 # grant privilledges to user pi.
-sudo usermod -a -G gpio,i2c pi && log_action_msg "grant privilledges to user pi" || log_warning_msg "Grant privilledges failed!" 
+sudo usermod -a -G gpio,i2c $USER && log_action_msg "grant privilledges to user $USER" || log_warning_msg "Grant privilledges failed!" 
 
 # download driver from internet 
 cd /usr/local/ 
 if [ ! -d luma.examples ]; then
    cd /usr/local/
-   git clone https://github.com/rm-hull/luma.examples.git && cd /usr/local/luma.examples/ && sudo cp -f /home/pi/absminitowerkit/sysinfo.py . || log_warning_msg "Could not download repository from github, please check the internet connection..." 
+   git clone https://github.com/rm-hull/luma.examples.git && cd /usr/local/luma.examples/ && sudo cp -f /home/$USER/absminitowerkit/sysinfo.py . || log_warning_msg "Could not download repository from github, please check the internet connection..." 
 else
    # copy sysinfo.py application to /usr/local/luma.examples/examples/ folder.
-   sudo cp -vf /home/pi/absminitowerkit/sysinfo.py /usr/local/luma.examples/examples/ 2>/dev/null
+   sudo cp -vf /home/$USER/absminitowerkit/sysinfo.py /usr/local/luma.examples/examples/ 2>/dev/null
 fi 
 
 cd /usr/local/luma.examples/  && sudo -H pip3 install -e . && log_action_msg "Install dependencies packages successfully..." || log_warning_msg "Cound not access github repository, please check the internet connections!!!" 
