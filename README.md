@@ -105,11 +105,11 @@ pixels[0].fill((0,0,0))
 # while loop
 while True:
     for i in range(0, 255):
-         np[1] = (randint(0,i), randint(i, 255), randint(i, 255))
-         np[2] = (randint(0,i), randint(i, 255), randint(0, i))
-         np[3] = (randint(i, 255), randint(0, i), randint(i, 255))
+         pixels[1] = (randint(0,i), randint(i, 255), randint(i, 255))
+         pixels[2] = (randint(0,i), randint(i, 255), randint(0, i))
+         pixels[3] = (randint(i, 255), randint(0, i), randint(i, 255))
          time.sleep(0.02)
-         np[4] = (0, 0, 0)  # turns off all leds
+         pixels[4] = (0, 0, 0)  # turns off all leds
 
 ```
 
