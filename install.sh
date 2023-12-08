@@ -26,7 +26,7 @@ else
    sudo cp -vf /home/pi/absminitowerkit/sysinfo.py /usr/local/luma.examples/examples/ 2>/dev/null
 fi 
 
-cd /usr/local/luma.examples/  && sudo -H pip3 install -e . && log_action_msg "Install dependencies packages successfully..." || log_warning_msg "Cound not access github repository, please check the internet connections!!!" 
+cd /usr/local/luma.examples/  && sudo -H pip3 install -e . --break-system-packages && log_action_msg "Install dependencies packages successfully..." || log_warning_msg "Cound not access github repository, please check the internet connections!!!" 
 
 # download rpi_ws281x libraries.
 # cd /usr/local/ 
