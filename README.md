@@ -10,10 +10,12 @@ ABS mini tower kit 's driver and installation script.
 sudo apt update 
 sudo apt upgrade -y 
 ```
+
 * 6. Enable I2C on Raspberry Pi.
 ```bash
 sudo raspi-config
 ```
+
 Navigate to `Interface Options` -> `I2C` -> Enable -> Select `YES`. 
 * 7. Clone Repository.
 ```bash
