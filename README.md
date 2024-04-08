@@ -24,6 +24,7 @@ git clone https://github.com/geeekpi/absminitowerkit.git
 * 8. Install driver.
 ```bash
 cd absminitowerkit/
+sudo chmod +x install.sh
 sudo ./install.sh
 ```
 * 9. Reboot and have fun.
