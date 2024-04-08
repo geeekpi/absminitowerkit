@@ -52,7 +52,7 @@ If you can not see the correct address, please check the connection of oled disp
 4. Download luma.examples OLED demo code repository and install the dependencies packages.
 ```bash
 cd 
-git clone https://github.com/rm-hull/luma.exmaples 
+git clone https://github.com/rm-hull/luma.examples.git
 cd luma.examples/
 sudo pip3 -H install -e .
 ```
