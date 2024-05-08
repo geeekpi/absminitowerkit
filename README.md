@@ -1,9 +1,9 @@
 # absminitowerkit
 ABS mini tower kit 's driver and installation script.
 ## Change Log##
-* Create new install_bookworm.sh shell script for the latest Raspberry Pi OS (bookworm 64bit) 
+* Create new `install_bookworm.sh` shell script for the latest Raspberry Pi OS (bookworm 64bit) 
 * Update the installation method.
-* Update uninstall.sh script 
+* Update `uninstall.sh` script 
 * adding some new features
 * adding manually install guidence. 
 * TODO: create pre-install image file
