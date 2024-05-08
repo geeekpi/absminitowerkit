@@ -8,10 +8,11 @@ StartLimitBurst=5
 RootDirectory=/ 
 User=root
 Type=simple
-ExecStart=sudo /usr/bin/moodlight &
+ExecStart=sudo /usr/bin/moodlight 
 RemainAfterExit=yes
 Restart=always
 RestartSec=30
 
 [Install]
 WantedBy=multi-user.target
+
