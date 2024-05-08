@@ -48,4 +48,8 @@ PS: please replace `$USER` to your own user name, we are using `pi` user by defa
 If you want to install the driver manually, please check the `systemd_file` folder and `demo_code` folder. 
 Hope you like it and have a nice day!
 ## Download Pre-installed Image 
-* TBD. 
+* TBD.
+## Gallery
+![image](https://github.com/geeekpi/absminitowerkit/assets/6893075/967a4e86-c2e3-4965-9deb-83c989ebca2c)
+
+![image](https://github.com/geeekpi/absminitowerkit/assets/6893075/d68ac48e-b2ba-4d38-baf3-c76500424401)
