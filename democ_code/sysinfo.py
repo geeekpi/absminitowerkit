@@ -1,9 +1,5 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
-# Copyright (c) 2014-2020 Richard Hull and contributors
-# See LICENSE.rst for details.
-# PYTHON_ARGCOMPLETE_OK
-
 
 import os
 import sys
@@ -18,12 +14,6 @@ import subprocess as sp
 
 
 def bytes2human(n):
-    """
-    >>> bytes2human(10000)
-    '9K'
-    >>> bytes2human(100001221)
-    '95M'
-    """
     symbols = ('K', 'M', 'G', 'T', 'P', 'E', 'Z', 'Y')
     prefix = {}
     for i, s in enumerate(symbols):
@@ -38,35 +28,29 @@ def bytes2human(n):
 def cpu_usage():
     # load average
     av1, av2, av3 = os.getloadavg()
-    return "Ld:%.1f %.1f %.1f " % (av1, av2, av3)
+    return "Ld:%.1f %.1f %.1f" % (av1, av2, av3)
 
 
 def uptime_usage():
     # uptime, Ip
-    uptime = datetime.now() - datetime.fromtimestamp(psutil.boot_time())
+    # uptime = datetime.now() - datetime.fromtimestamp(psutil.boot_time())
     ip = sp.getoutput("hostname -I").split(' ')[0]
-    return "Up: %s,IP:%s" % (uptime, ip)
+    return "IP:%s" % (ip)
     
-
-
-
 
 def mem_usage():
     usage = psutil.virtual_memory()
-    return "Mem: %s %.0f%%" \
-        % (bytes2human(usage.used), 100 - usage.percent)
+    return "Mem:%s %.0f%%" % (bytes2human(usage.used), 100 - usage.percent)
 
 
 def disk_usage(dir):
     usage = psutil.disk_usage(dir)
-    return "SD:  %s %.0f%%" \
-        % (bytes2human(usage.used), usage.percent)
+    return "SD:%s %.0f%%" % (bytes2human(usage.used), usage.percent)
 
 
 def network(iface):
     stat = psutil.net_io_counters(pernic=True)[iface]
-    return "%s: Tx%s, Rx%s" % \
-           (iface, bytes2human(stat.bytes_sent), bytes2human(stat.bytes_recv))
+    return "%s: Tx: %s,Rx: %s" % (iface, bytes2human(stat.bytes_sent), bytes2human(stat.bytes_recv))
 
 
 def stats(device):
@@ -95,3 +79,4 @@ device = get_device()
 while True:
     stats(device)
     time.sleep(5)
+
