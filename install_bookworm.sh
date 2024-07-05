@@ -334,4 +334,4 @@ do
    clear
 done
 sudo sync
-# sudo reboot
+sudo reboot
